@@ -2,6 +2,7 @@
 import simpleGit, {SimpleGit, SimpleGitOptions} from 'simple-git';
 import createLogger from 'progress-estimator';
 import chalk from 'chalk';
+const figlet = require('figlet');
 import log from './log';
 // 初始化进度条
 const logger = createLogger({
@@ -13,6 +14,11 @@ const logger = createLogger({
         ),
     },
 });
+
+const goodPrinter = async () => {
+    const data = await figlet('yuhui-cli');
+    console.log(chalk.rgb(40, 156, 193).visible(data));
+};
 
 const gitOptions: Partial<SimpleGitOptions> = {
     baseDir: process.cwd(), // 当前工作目录
@@ -26,6 +32,7 @@ export const clone = async (url: string, projectName: string, options: string[])
         await logger(git.clone(url, projectName, options), '代码下载中: ', {
             estimate: 7000, // 预计下载时间
         });
+        goodPrinter();
         console.log();
         console.log(chalk.blueBright(`==================================`));
         console.log(chalk.blueBright(`=== 欢迎使用 yuhui 脚手架 ===`));
