@@ -2,6 +2,7 @@
 import { Command } from 'commander'
 import { version } from '../package.json'
 import { create } from './command/create'
+import { update } from './command/update'
 // 这里我们用 yuhui 当作我的指令名称
 // 命令行中使用 yuhui xxx 即可触发
 const program = new Command('yuhui');
@@ -11,7 +12,7 @@ program
     .command('update')
     .description('更新 yuhui 至最新版本')
     .action(async () => {
-        console.log('update command')
+        await update();
     });
 
 program
